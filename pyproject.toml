@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "simple-task-manager"
+version = "0.1.0"
+description = ""
+authors = ["Oleg Izyumov <bukvoezhka@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Django = "^4.0.4"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+gunicorn = "^20.1.0"
+flake8 = "^4.0.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
