@@ -10,13 +10,14 @@ class EventForm(ModelForm):
             'category': Select(attrs={
                 'class': 'form-select',
                 'size': '5',
-                'aria-label': 'size 3 select'
+                'aria-label': 'category selection',
             }),
             'description': Textarea(attrs={
-                    'class': 'form-control',
-                    'rows': '8'
-                })}
+                'class': 'form-control',
+                'rows': '8',
+                'aria-label': 'category description',
+            })}
 
     def __init__(self, *args, **kwargs):
         super(EventForm, self).__init__(*args, **kwargs)
-        self.fields['category'].initial = 1
+        self.fields['category'].initial = 0

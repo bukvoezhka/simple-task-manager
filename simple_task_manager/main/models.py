@@ -38,7 +38,7 @@ class Event(models.Model):
         to=ArchiveReport,
         verbose_name='Отчет за период',
         on_delete=models.SET_DEFAULT,
-        default='',
+        default=None,
         blank=True,
         null=True,
         related_name='related_archive_events',
