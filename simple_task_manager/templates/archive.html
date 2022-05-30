@@ -22,19 +22,19 @@
       {% include 'index.html' %}
     </div>
 
-    <div class="accordion" id="accordionPanelsStayOpenExample">
+    <div class="accordion" id="archive_reports_panel">
 
       {% for archive_report in archive_reports %}
       <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+        <h2 class="accordion-header" id="panelsStayOpen-heading{{ forloop.counter }}">
           <button class="accordion-button" type="button" data-bs-toggle="collapse"
-            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-            aria-controls="panelsStayOpen-collapseOne">
-            Отчет за период: {{ archive_report.start_date|date:"SHORT_DATE_FORMAT" }} - {{ archive_report.end_date|date:"SHORT_DATE_FORMAT" }}
+            data-bs-target="#panelsStayOpen-collapse{{ forloop.counter }}" aria-expanded="true"
+            aria-controls="panelsStayOpen-collapse{{ forloop.counter }}">
+            Отчет за период: {{ archive_report.start_date|date:"d.m.Y" }} - {{ archive_report.end_date|date:"d.m.Y" }}
           </button>
         </h2>
-        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
-          aria-labelledby="panelsStayOpen-headingOne">
+        <div id="panelsStayOpen-collapse{{ forloop.counter }}" class="accordion-collapse collapse show"
+          aria-labelledby="panelsStayOpen-heading{{ forloop.counter }}">
           <div class="accordion-body">
             {% for category in categories %}
             <strong>{{ category }}</strong>
