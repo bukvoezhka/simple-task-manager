@@ -1,5 +1,5 @@
-from django.forms import ModelForm, Select, Textarea
-from simple_task_manager.main.models import Event
+from django.forms import SelectDateWidget, ModelForm, Select, Textarea
+from simple_task_manager.main.models import Event, ArchiveReport
 
 
 class EventForm(ModelForm):
@@ -21,3 +21,13 @@ class EventForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(EventForm, self).__init__(*args, **kwargs)
         self.fields['category'].initial = 0
+
+
+class ReportForm(ModelForm):
+    class Meta:
+        model = ArchiveReport
+        fields = ['start_date', 'end_date']
+        widgets = {
+            'start_date': SelectDateWidget(),
+            'end_date': SelectDateWidget(),
+        }
