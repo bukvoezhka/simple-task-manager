@@ -26,15 +26,15 @@
 
       {% for archive_report in archive_reports %}
       <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-heading{{ forloop.counter }}">
+        <h2 class="accordion-header" id="archive_reports_panels-heading{{ forloop.counter }}">
           <button class="accordion-button" type="button" data-bs-toggle="collapse"
-            data-bs-target="#panelsStayOpen-collapse{{ forloop.counter }}" aria-expanded="true"
-            aria-controls="panelsStayOpen-collapse{{ forloop.counter }}">
+            data-bs-target="#archive_reports_panels-collapse{{ forloop.counter }}" aria-expanded="true"
+            aria-controls="archive_reports_panels-collapse{{ forloop.counter }}">
             Отчет за период: {{ archive_report.start_date|date:"d.m.Y" }} - {{ archive_report.end_date|date:"d.m.Y" }}
           </button>
         </h2>
-        <div id="panelsStayOpen-collapse{{ forloop.counter }}" class="accordion-collapse collapse show"
-          aria-labelledby="panelsStayOpen-heading{{ forloop.counter }}">
+        <div id="archive_reports_panels-collapse{{ forloop.counter }}" class="accordion-collapse collapse"
+          aria-labelledby="archive_reports_panels-heading{{ forloop.counter }}">
           <div class="accordion-body">
             {% for category in categories %}
             <strong>{{ category }}</strong>
