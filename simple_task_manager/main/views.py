@@ -51,10 +51,13 @@ def create_report(request):
             end_date = form.cleaned_data['end_date']
             archive_events = Event.objects.filter(archive_report=None).filter(
                 created_at__gte=start_date).filter(created_at__lte=end_date)
-            print('ARCHIVE_EVENTS ---->', archive_events)
             form.save()
+            for archive_event in archive_events:
+                archive_event.archive_report = ArchiveReport.objects.last()
+            Event.objects.bulk_update(archive_events, ['archive_report'])
     return redirect('home')
 
 
-def is_asd():
-    pass
+def is_asd(events):
+    for event in events:
+        pass
