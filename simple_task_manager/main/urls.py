@@ -18,7 +18,7 @@ from simple_task_manager.main import views
 
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('home/', views.home, name='home'),
     path('archive/', views.archive, name='archive'),
     path('create_event/', views.create_event, name='create_event'),
     path('delete_event/<int:id>', views.delete_event, name='delete_event'),
