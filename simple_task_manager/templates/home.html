@@ -169,19 +169,18 @@
             </div>
           </div>
         </div>
-        <div class="d-md-flex justify-content-md-end">
-          <form action="{% url 'create_report' %}" method="post">
-            {% csrf_token %}
-            <table>
-              {{ report_form.start_date }}
-              {{ report_form.end_date }}
-              <tr>
-                <input type="submit" class="btn btn-primary mb-3" data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop">
-                <td></td>
-              </tr>
-            </table>
-          </form>
+        <div class="row">
+          <div class="d-md-flex justify-content-md-end">
+            <form action="{% url 'create_report' %}" method="post">
+              {% csrf_token %}
+              <div class="input-group">
+                <span class="input-group-text">Интервал для отчета:</span>
+                {{ report_form.start_date }}
+                {{ report_form.end_date }}
+                <input type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              </div>
+            </form>
+          </div>
 
           {# comment #}
           <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
