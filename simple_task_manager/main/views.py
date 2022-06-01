@@ -15,7 +15,12 @@ def home(request):
         'completed_activity': completed_activity,
         'hr_events': hr_events,
         'form': EventForm(),
-        'report_form': ReportForm(),
+        'report_form': ReportForm(
+            initial={
+                'start_date': '2022-05-30',
+                'end_date': '2022-06-01',
+            }
+        ),
     })
 
 
@@ -52,12 +57,6 @@ def create_report(request):
             archive_events = Event.objects.filter(archive_report=None).filter(
                 created_at__gte=start_date).filter(created_at__lte=end_date)
             form.save()
-            for archive_event in archive_events:
-                archive_event.archive_report = ArchiveReport.objects.last()
-            Event.objects.bulk_update(archive_events, ['archive_report'])
+            archive_report = ArchiveReport.objects.get(start_date=start_date, end_date=end_date)
+            archive_events.update(archive_report=archive_report)
     return redirect('home')
-
-
-def is_asd(events):
-    for event in events:
-        pass
