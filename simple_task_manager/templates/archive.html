@@ -24,7 +24,7 @@
 
     <div class="accordion" id="archive_reports_panel">
 
-      {% for archive_report in archive_reports %}
+      {% for archive_report in archive_reports reversed %}
       <div class="accordion-item">
         <h2 class="accordion-header" id="archive_reports_panels-heading{{ forloop.counter }}">
           <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -40,9 +40,9 @@
             <strong>{{ category }}</strong>
             <ul>
               {% for event in category.related_category_events.all %}
-              {% if event.archive_report == archive_report %}
-              <li class="list-group-item">{{ event }}</li>
-              {% endif %}
+                {% if event.archive_report == archive_report %}
+                  <li class="list-group-item">{{ event }}</li>
+                {% endif %}
               {% endfor %}
             </ul>
             {% endfor %}
