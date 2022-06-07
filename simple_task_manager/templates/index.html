@@ -1,15 +1,20 @@
 {% load static %}
 <link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
 <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-        <svg class="bi me-2" width="40" height="32">
-            <use xlink:href="{% url 'home' %}"></use>
-        </svg>
-        <span class="fs-4">Simple task manager</span>
-    </a>
-    <ul class="nav nav-pills">
-        <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="{% url 'archive' %}" class="nav-link">Archive</a></li>
-        <button type="button" class="btn btn-outline-primary me-2">Login</button>
-    </ul>
+  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+    <svg class="bi me-2" width="40" height="32">
+      <use xlink:href="{% url 'home' %}"></use>
+    </svg>
+    <span class="fs-4">Simple task manager</span>
+  </a>
+  <ul class="nav nav-pills">
+    <li class="nav-item"><a class="nav-link disabled">Logged in as: {{ user }}</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'archive' %}">Archive</a></li>
+    {% if user.is_authenticated %}
+    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}?next={{request.path}}">Logout</a></li>
+    {% else %}
+    <li class="nav-item"><a class="nav-link" href="{% url 'sign_in' %}">Login</a></li>
+    {% endif %}
+  </ul>
 </header>

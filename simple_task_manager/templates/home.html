@@ -18,6 +18,7 @@
 
 </head>
 
+{% if user.is_authenticated %}
 <body class="bg-light">
   <div class="container">
     {% include 'index.html' %}
@@ -26,11 +27,11 @@
         <form action="{% url 'create_event' %}" method="post">
           {% csrf_token %}
           <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label mt-3">Выбор категории:</label>
+            <label for="exampleFormControlTextarea1" class="form-label mt-3">Выберите категорию:</label>
             {{ form.category }}
           </div>
           <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Описание</label>
+            <label for="exampleFormControlTextarea1" class="form-label">Введите описание:</label>
             {{ form.description }}
           </div>
           <button class="btn btn-primary">Добавить</button>
@@ -53,18 +54,24 @@
                   <table class="table table-bordered table-hover align-middle">
                     <tbody>
 
-                      {% for item in incedents %}
-                      <tr>
-                        <td class="col-11">
-                          {{ item.description }}
-                        <td>
-                          <div class="d-md-flex justify-content-md-end">
-                            <a type="button" class="btn btn-outline-danger"
-                              href="{% url 'delete_event' id=item.id %}">Удалить</button></a>
-                          </div>
-                        </td>
-                      </tr>
-                      {% endfor %}
+                      {% if incedents %}
+                        {% for item in incedents %}
+                        <tr>
+                          <td class="col-11">
+                            {{ item.description }}
+                          <td>
+                            <div class="d-md-flex justify-content-md-end">
+                              <a type="button" class="btn btn-outline-danger"
+                                href="{% url 'delete_event' id=item.id %}">Удалить</button></a>
+                            </div>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      {% else %}
+                      <div class="row align-items-center">
+                        <em>События в представлении отсутствуют.</em>
+                      </div>
+                      {% endif %}
 
                     </tbody>
                   </table>
@@ -85,18 +92,24 @@
                   <table class="table table-bordered table-hover align-middle">
                     <tbody>
 
-                      {% for item in currents_activity %}
-                      <tr>
-                        <td class="col-11">
-                          {{ item.description }}
-                        <td>
-                          <div class="d-md-flex justify-content-md-end">
-                            <a type="button" class="btn btn-outline-danger"
-                              href="{% url 'delete_event' id=item.id %}">Удалить</button></a>
-                          </div>
-                        </td>
-                      </tr>
-                      {% endfor %}
+                      {% if currents_activity %}
+                        {% for item in currents_activity %}
+                        <tr>
+                          <td class="col-11">
+                            {{ item.description }}
+                          <td>
+                            <div class="d-md-flex justify-content-md-end">
+                              <a type="button" class="btn btn-outline-danger"
+                                href="{% url 'delete_event' id=item.id %}">Удалить</button></a>
+                            </div>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      {% else %}
+                        <table class="table table-bordered table-hover align-middle">
+                          <em>События в представлении отсутствуют.</em>
+                        </table>
+                      {% endif %}
 
                     </tbody>
                   </table>
@@ -117,18 +130,24 @@
                   <table class="table table-bordered table-hover align-middle">
                     <tbody>
 
-                      {% for item in completed_activity %}
-                      <tr>
-                        <td class="col-11">
-                          {{ item.description }}
-                        <td>
-                          <div class="d-md-flex justify-content-md-end">
-                            <a type="button" class="btn btn-outline-danger"
-                              href="{% url 'delete_event' id=item.id %}">Удалить</button></a>
-                          </div>
-                        </td>
-                      </tr>
-                      {% endfor %}
+                      {% if completed_activity %}
+                        {% for item in completed_activity %}
+                        <tr>
+                          <td class="col-11">
+                            {{ item.description }}
+                          <td>
+                            <div class="d-md-flex justify-content-md-end">
+                              <a type="button" class="btn btn-outline-danger"
+                                href="{% url 'delete_event' id=item.id %}">Удалить</button></a>
+                            </div>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      {% else %}
+                        <table class="table table-bordered table-hover align-middle">
+                          <em>События в представлении отсутствуют.</em>
+                        </table>
+                      {% endif %}
 
                     </tbody>
                   </table>
@@ -149,18 +168,24 @@
                   <table class="table table-bordered table-hover align-middle">
                     <tbody>
 
-                      {% for item in hr_events %}
-                      <tr>
-                        <td class="col-11">
-                          {{ item.description }}
-                        <td>
-                          <div class="d-md-flex justify-content-md-end">
-                            <a type="button" class="btn btn-outline-danger"
-                              href="{% url 'delete_event' id=item.id %}">Удалить</button></a>
-                          </div>
-                        </td>
-                      </tr>
-                      {% endfor %}
+                      {% if hr_events %}
+                        {% for item in hr_events %}
+                        <tr>
+                          <td class="col-11">
+                            {{ item.description }}
+                          <td>
+                            <div class="d-md-flex justify-content-md-end">
+                              <a type="button" class="btn btn-outline-danger"
+                                href="{% url 'delete_event' id=item.id %}">Удалить</button></a>
+                            </div>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      {% else %}
+                        <table class="table table-bordered table-hover align-middle">
+                          <em>События в представлении отсутствуют.</em>
+                        </table>
+                      {% endif %}
 
                     </tbody>
                   </table>
@@ -208,5 +233,6 @@
     </div>
   </div>
 </body>
+{% endif %}
 
 </html>
