@@ -1,7 +1,5 @@
 from django.shortcuts import redirect, render
 from django.db import transaction
-from django.contrib.auth import authenticate, login
-from django.contrib import messages
 from datetime import date, timedelta
 from simple_task_manager.main.models import ArchiveReport, Category, Event
 from simple_task_manager.main.forms import EventForm, ReportForm
@@ -66,20 +64,3 @@ def create_report(request):
             archive_report = form.save()
             archive_events.update(archive_report=archive_report)
     return redirect('home')
-
-
-def sign_in(request):
-    if request.user.is_authenticated:
-        return redirect('home')
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('home')
-        else:
-            messages.error(request, message='There was an error logging in. Check credentials and try again.')
-            return redirect('sign_in')
-    else:
-        return render(request, 'sign_in.html')
