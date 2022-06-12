@@ -21,6 +21,6 @@ from simple_task_manager import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.sign_in, name='sign_in'),
-    path('stm/', include('django.contrib.auth.urls')),
+    path('logout/', views.logout_view, name='logout'),
     path('stm/', include('simple_task_manager.main.urls')),
 ]
