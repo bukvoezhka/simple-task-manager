@@ -9,8 +9,9 @@ class EventForm(ModelForm):
         widgets = {
             'category': Select(attrs={
                 'class': 'form-select',
-                'size': '5',
+                'size': '4',
                 'aria-label': 'category selection',
+                'required': 'True'
             }),
             'description': Textarea(attrs={
                 'class': 'form-control',
@@ -20,7 +21,7 @@ class EventForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(EventForm, self).__init__(*args, **kwargs)
-        self.fields['category'].initial = 0
+        self.fields['category'].empty_label = None
 
 
 class DateInput(DateInput):

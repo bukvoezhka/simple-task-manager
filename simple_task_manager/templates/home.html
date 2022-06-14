@@ -18,28 +18,34 @@
 
 </head>
 
-{% if user.is_authenticated %}
-
 <body class="bg-light">
   <div class="container">
     {% include 'index.html' %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }} text-danger"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <div class="row">
       <div class="col-3">
         <form action="{% url 'create_event' %}" method="post">
           {% csrf_token %}
+          <div class="my-3">
+            <label for="CategorySelect" class="form-label">Выберите категорию:</label>
+            {{ event_form.category }}
+          </div>          
           <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label mt-3">Выберите категорию:</label>
-            {{ form.category }}
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Введите описание:</label>
-            {{ form.description }}
+            <label for="DescriptionInput" class="form-label">Введите описание:</label>
+            {{ event_form.description }}
           </div>
           <button class="btn btn-primary">Добавить</button>
         </form>
       </div>
       <div class="col-9">
         <div class="my-3">
+          <label for="CurrentView" class="form-label">Текущие события</label>
           <div class="accordion" id="accordionPanelsStayOpenExample">
             <div class="accordion-item">
               <h2 class="accordion-header" id="panelsStayOpen-headingOne">
@@ -194,14 +200,14 @@
               </div>
             </div>
           </div>
-        </div> 
+        </div>
 
         <div class="row">
           <div class="d-md-flex mb-3 justify-content-md-end">
             <form action="{% url 'create_report' %}" method="post">
               {% csrf_token %}
               <div class="input-group">
-                <span class="input-group-text">Интервал для отчета:</span>
+                <span class="input-group-text">Интервал отчета для добавления событий:</span>
                 {{ report_form.start_date }}
                 {{ report_form.end_date }}
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -219,7 +225,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  Сформировать и отправить отчет?
+                  Добавить события в отчет?
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
@@ -235,6 +241,5 @@
     </div>
   </div>
 </body>
-{% endif %}
 
 </html>
