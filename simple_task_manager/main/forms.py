@@ -11,7 +11,7 @@ class EventForm(ModelForm):
                 'class': 'form-select',
                 'size': '4',
                 'aria-label': 'category selection',
-                'required': 'True'
+                'required': '',
             }),
             'description': Textarea(attrs={
                 'class': 'form-control',
