@@ -4,6 +4,8 @@ from django.contrib import messages
 
 
 def sign_in(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
